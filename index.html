@@ -3,15 +3,24 @@
   <head>
     <link rel="icon" type="image/png" href="static/favicon.png"/>
     <link rel="stylesheet" href="/static/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/sitestyle.css">
     <script src="/static/jquery-1.11.1.min.js"></script>
+    <script src="/static/jycho.js"></script>
 
     <script type="text/javascript">
+      function Main(){
+        var states = getStates('2f2aee936736fe734d68');
+        for (i in states){
+          //alert(disease);
+          $("#test").append("<li>" + states[i] + "</li>");
+        }
+      }
+      $(document).ready(Main);
     </script>
 
 
   </head>
   <body>
-        
+    <div id="test"></div>
+    <p id="diseases"></p>
   </body>
 </html>
