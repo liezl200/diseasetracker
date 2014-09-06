@@ -72,7 +72,7 @@ class LocDataHandler(webapp2.RequestHandler):
 		loc = self.request.get('loc')
 		state = self.request.get('state')
 		disease = self.request.get('disease')
-		event = self.request.get('event')
+		ev = self.request.get('event')
 		start = self.request.get('start')
 		end = self.request.get('end')
 
@@ -80,11 +80,12 @@ class LocDataHandler(webapp2.RequestHandler):
 		template = jinja_environment.get_template('data.xml')
 
 		#build xml request
-		xmlurl = 'http://www.tycho.pitt.edu/api/query?loc_type=' + loc_type \
+		xmlurl = 'http://www.tycho.pitt.edu/api/query?' \
+			+ 'loc_type=' + loc_type \
 			+ '&loc='+ loc \
 			+ '&state=' + state \
 			+ '&disease=' + disease \
- 			+ '&event=' + event
+ 			+ '&event=' + ev
 		if start: #optional query param
 			xmlurl += '&start=' + start
 		if end: #optional query param
@@ -111,7 +112,7 @@ app = webapp2.WSGIApplication([
   ('/listDiseases', DiseaseHandler),
   ('/listCities', CityHandler),
   ('/listStates', StateHandler),
-  ('/getData', LocDataHandler)
+  ('/locData', LocDataHandler)
   #('/stateData', StateDataHandler),
   #('/cityData', CityDataHandler),
 ], debug=True)

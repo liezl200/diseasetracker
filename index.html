@@ -8,10 +8,17 @@
 
     <script type="text/javascript">
       function Main(){
-        var states = getStates('2f2aee936736fe734d68');
+        /*var states = getLocData('city', 'Pittsburgh', 'PA', 'measles', 'cases');
         for (i in states){
           //alert(disease);
           $("#test").append("<li>" + states[i] + "</li>");
+        }*/
+        var count1906 = getYrCityDCounts('measles', 1906);
+        for(var key in count1906){
+          if(count1906.hasOwnProperty(key)){
+            $("#test").append("<li>" + key + ';;;' + count1906[key] + "</li>");
+          }
+  
         }
       }
       $(document).ready(Main);
