@@ -34,6 +34,37 @@
         map = new google.maps.Map(document.getElementById("map-canvas"),
             mapOptions);
       }
+      /*function determineColor(counts) {
+        var maxCount = Math.max.apply(null, counts);
+        for(var i = 0; i < counts.length; i++) {
+          switch(maxCount) {
+            case 
+          }
+        }
+      }*/
+      /*
+      colors to use:
+      00FF33
+      00FF00
+      CCFF33
+      CCFF00
+      FF3300
+      FF0000
+      */
+      /*
+      data to use:
+      State, Anthrax, 1942-1944
+      State, Influenza, 1945, 1950
+      State, Chicken Pox, 1977
+        New York
+          Buffalo
+          New York
+          Rochester
+          Syracuse
+      State, Leprosy, 1942-1944
+      State, Pneumonia, 1949, 1950
+      State, Streptococcal Sore Throat, 1960, 1961
+      */
       function codeAddress() {
         var address = document.getElementById("address").value;
         geocoder.geocode( { 'address': address}, function(results, status) {
@@ -62,9 +93,6 @@
           }
         }); 
       }
-      function asdf(circle) {
-        google.maps.event.addListener(circle, 'mouseover', alert("mousedover"));
-      }
       function bindInfoWindow(circle, map, infowindow, html) {
           google.maps.event.addListener(circle, 'click', function() {
               infowindow.setPosition(circle.getCenter());
@@ -91,7 +119,7 @@
         <option value="disease2">disease2</option>
       </select>
       <input id="address" type="textbox" value="Kansas City, KS">
-      <input type="button" value="Encode" onclick="codeAddress()">
+      <input type="button" value="Update" onclick="codeAddress()">
     </div>
     <div id="map-canvas"/>
   </body>
