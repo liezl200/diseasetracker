@@ -9,7 +9,7 @@ function initializeXMLRequest(){
 	  xhttp = new ActiveXObject("Microsoft.XMLHTTP");
 	}
 }
-function getStateData(apikey, event, disease, state){
+function getStateData(event, disease, state){
 	if(xhttp == null)
 		initializeXMLRequest();
 	var diseases = [];
@@ -26,24 +26,7 @@ function getStateData(apikey, event, disease, state){
 	return diseases;
 }
 
-function getCityData(apikey, event, disease, city){
-	if(xhttp == null)
-		initializeXMLRequest();
-	var diseases = [];
-	//serverUrl = "http://www.tycho.pitt.edu/api/diseases?apikey="
-	var serverUrl = "http://localhost:8080/cityData";
-
-	xhttp.open("GET", serverUrl, false);
-	xhttp.send();
-	xmlDoc = xhttp.responseXML;
-	d = xmlDoc.getElementsByTagName('disease')
-	for (i = 0; i < d.length; i++) {
-		diseases.push(d[i].childNodes[0].nodeValue);
-	}
-	return diseases;
-}
-
-function getStates(apikey){
+function getStates(){
 	if(xhttp == null)
 		initializeXMLRequest();
 	var states = [];
@@ -61,7 +44,7 @@ function getStates(apikey){
 	return states;
 }
 
-function getCities(apikey){
+function getCities(){
 	if(xhttp == null)
 		initializeXMLRequest();
 	var cities = [];
@@ -79,7 +62,7 @@ function getCities(apikey){
 	return diseases;
 }
 
-function getDiseases(apikey){
+function getDiseases(){
 	if(xhttp == null)
 		initializeXMLRequest();
 	var diseases = [];

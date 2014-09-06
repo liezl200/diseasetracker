@@ -80,11 +80,11 @@ class LocDataHandler(webapp2.RequestHandler):
 		template = jinja_environment.get_template('data.xml')
 
 		#build xml request
-		xmlurl = 'http://www.tycho.pitt.edu/api/query?loc_type=' + loc_type
-			+ '&loc='+ loc
-			+ '&state=' + state 
-			+ '&disease=' + disease
-			+ '&event=' + event
+		xmlurl = 'http://www.tycho.pitt.edu/api/query?loc_type=' + loc_type \
+			+ '&loc='+ loc \
+			+ '&state=' + state \
+			+ '&disease=' + disease \
+ 			+ '&event=' + event
 		if start: #optional query param
 			xmlurl += '&start=' + start
 		if end: #optional query param
