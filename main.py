@@ -36,5 +36,5 @@ jinja_environment = jinja2.Environment(loader=
 
 app = webapp2.WSGIApplication([
   ('/map', MapHandler),
-  ('/index', IndexHandler)
+  ('/index', IndexHandler),
 ], debug=True)
