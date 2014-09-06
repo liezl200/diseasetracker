@@ -44,7 +44,7 @@
               position: results[0].geometry.location
             });*/
             var point = results[0].geometry.location;
-            circle = new google.maps.Circle({
+            var circle = new google.maps.Circle({
               center: new google.maps.LatLng(point.k, point.B),
               radius: 25000,
               fillColor: "Red",
@@ -52,15 +52,26 @@
               strokeWeight: 0,
               map: map
             });
+
+            var infowindow =  new google.maps.InfoWindow({
+                content: ''
+            });
+            bindInfoWindow(circle, map, infowindow, 'test' + "<br>" + 'testline2');
           } else {
             alert("Geocode was not successful for the following reason: " + status);
           }
         }); 
       }
-      function asdf() {
-        google.maps.event.addListener(google.maps.Circle, 'mouseover', alert("mousedover"));
+      function asdf(circle) {
+        google.maps.event.addListener(circle, 'mouseover', alert("mousedover"));
       }
-      
+      function bindInfoWindow(circle, map, infowindow, html) {
+          google.maps.event.addListener(circle, 'click', function() {
+              infowindow.setPosition(circle.getCenter());
+              infowindow.setContent(html);
+              infowindow.open(map);
+          });
+      } 
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
   </head>
