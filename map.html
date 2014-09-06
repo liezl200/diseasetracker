@@ -42,9 +42,10 @@
               map: map,
               position: results[0].geometry.location
             });*/
+            var point = results[0].geometry.location;
             var circle = new google.maps.Circle({
-              center: new google.maps.LatLng(39.0997, -94.5783),
-              radius: 100000,
+              center: new google.maps.LatLng(point.k, point.B),
+              radius: 50000,
               fillColor: "Red",
               fillOpacity: .5,
               strokeWeight: 0,
