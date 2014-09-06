@@ -28,7 +28,8 @@
         var latlng = new google.maps.LatLng(39.0997, -94.5783);
         var mapOptions = {
           center: latlng,
-          zoom: 5
+          zoom: 5,
+          streetViewControl: false
         };
         map = new google.maps.Map(document.getElementById("map-canvas"),
             mapOptions);
@@ -45,7 +46,7 @@
             var point = results[0].geometry.location;
             var circle = new google.maps.Circle({
               center: new google.maps.LatLng(point.k, point.B),
-              radius: 50000,
+              radius: 25000,
               fillColor: "Red",
               fillOpacity: .5,
               strokeWeight: 0,
@@ -55,6 +56,7 @@
             alert("Geocode was not successful for the following reason: " + status);
           }
         });
+        //google.maps.event.addListener()
       }
 
       google.maps.event.addDomListener(window, 'load', initialize);
@@ -69,7 +71,7 @@
         <option value="2003">2003</option>
       </select>
 
-      <select>
+      <select id="disease">
         <option value="chicken pox">chicken pox</option>
         <option value="aids">aids</option>
         <option value="disease1">disease1</option>
