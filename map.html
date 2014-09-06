@@ -37,10 +37,18 @@
         var address = document.getElementById("address").value;
         geocoder.geocode( { 'address': address}, function(results, status) {
           if (status == google.maps.GeocoderStatus.OK) {
-            map.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
+            //map.setCenter(results[0].geometry.location);
+            /*var marker = new google.maps.Marker({
               map: map,
               position: results[0].geometry.location
+            });*/
+            var circle = new google.maps.Circle({
+              center: new google.maps.LatLng(39.0997, -94.5783),
+              radius: 100000,
+              fillColor: "Red",
+              fillOpacity: .5,
+              strokeWeight: 0,
+              map: map
             });
           } else {
             alert("Geocode was not successful for the following reason: " + status);
@@ -53,7 +61,20 @@
   </head>
   <body onload="initialize()">
     <div id="panel">
-      <input id="address" type="textbox" value="Kansas City, KS, USA">
+      <select>
+        <option value="2000">2000</option>
+        <option value="2001">2001</option>
+        <option value="2002">2002</option>
+        <option value="2003">2003</option>
+      </select>
+
+      <select>
+        <option value="chicken pox">chicken pox</option>
+        <option value="aids">aids</option>
+        <option value="disease1">disease1</option>
+        <option value="disease2">disease2</option>
+      </select>
+      <input id="address" type="textbox" value="Kansas City, KS">
       <input type="button" value="Encode" onclick="codeAddress()">
     </div>
     <div id="map-canvas"/>
