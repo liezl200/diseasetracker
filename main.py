@@ -66,7 +66,41 @@ class StateHandler(webapp2.RequestHandler):
 		self.response.headers['Content-Type'] = 'text/xml'
 		self.response.out.write(template.render(template_values))
 
+class LocDataHandler(webapp2.RequestHandler):
+	def get(self):
+		loc_type = self.request.get('loc_type')
+		loc = self.request.get('loc')
+		state = self.request.get('state')
+		disease = self.request.get('disease')
+		event = self.request.get('event')
+		start = self.request.get('start')
+		end = self.request.get('end')
 
+		template_values = {}
+		template = jinja_environment.get_template('data.xml')
+
+		#build xml request
+		xmlurl = 'http://www.tycho.pitt.edu/api/query?loc_type=' + loc_type
+			+ '&loc='+ loc
+			+ '&state=' + state 
+			+ '&disease=' + disease
+			+ '&event=' + event
+		if start: #optional query param
+			xmlurl += '&start=' + start
+		if end: #optional query param
+			xmlurl += '&end=' + end
+
+		#global var
+		xmlurl += '&apikey=' + apikey
+
+		#read xml
+		xml = urllib.urlopen(xmlurl).read()
+
+		#serve xml
+		template_values = {'xml':xml}
+		self.response.headers['Access-Control-Allow-Origin'] = '*'
+		self.response.headers['Content-Type'] = 'text/xml'
+		self.response.out.write(template.render(template_values))
 
 jinja_environment = jinja2.Environment(loader=
   jinja2.FileSystemLoader(os.path.dirname(__file__)))
@@ -77,6 +111,7 @@ app = webapp2.WSGIApplication([
   ('/listDiseases', DiseaseHandler),
   ('/listCities', CityHandler),
   ('/listStates', StateHandler),
+  ('/getData', LocDataHandler)
   #('/stateData', StateDataHandler),
   #('/cityData', CityDataHandler),
 ], debug=True)
