@@ -35,19 +35,28 @@
         };
         map = new google.maps.Map(document.getElementById("map-canvas"),
             mapOptions);
-        determineColor(getYrStateDCounts('Anthrax', 1942));
+        determineColor(getYrCityDCounts('Anthrax', 1942));
         
       }
       function determineColor(countDict) {
         // get the list of values for every key in the associative array/ object/ 'dictionary'
-        var counts = Object.keys( countDict ).map(function ( key ) { return countDict[key]; });
+        //var counts = Object.keys( countDict ).map(function ( key ) { return countDict[key]; });
         //counts = [3, 3, 3, 3];
-        var maxCount = Math.max.apply(null, counts);
-        var sectionSize = maxCount/6.0;
-        for(location in countDict) {
+        //var maxCount = Math.max.apply(null, counts);
+        var maxCt = 0;
+        for(var key in countDict){
+          if (countDict[key] > maxCt){
+            maxCt = countDict[key];
+          }
+        }
+        var sectionSize = maxCt/6.0;
+
+        for(var location in countDict) {
+
           var ct = countDict[location];
           var color = "#FF0000";
-          switch(int(ct/sectionSize)){
+          alert(ct/sectionSize);
+          switch(Math.floor(ct/sectionSize)){
             case 4:
               color = "#FF3300";
               break;
@@ -64,7 +73,7 @@
               color = "#00FF33";
               break;
           }
-          alert(location);
+          codeAddress(location, color);
         }
       }
       
