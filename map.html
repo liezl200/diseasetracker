@@ -20,6 +20,8 @@
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUNBU9A2fuZ25CX_LfvEPCBjTAy8r3iBc">
     </script>
+    <script src="/static/jycho.js"></script>
+
     <script type="text/javascript">
       var geocoder;
       var map;
@@ -33,16 +35,38 @@
         };
         map = new google.maps.Map(document.getElementById("map-canvas"),
             mapOptions);
+        determineColor(getYrStateDCounts('Anthrax', 1942));
         
       }
-      /*function determineColor(counts) {
+      function determineColor(countDict) {
+        // get the list of values for every key in the associative array/ object/ 'dictionary'
+        var counts = Object.keys( countDict ).map(function ( key ) { return countDict[key]; });
+        //counts = [3, 3, 3, 3];
         var maxCount = Math.max.apply(null, counts);
-        for(var i = 0; i < counts.length; i++) {
-          switch(maxCount) {
-            case 
+        var sectionSize = maxCount/6.0;
+        for(location in countDict) {
+          var ct = countDict[location];
+          var color = "#FF0000";
+          switch(int(ct/sectionSize)){
+            case 4:
+              color = "#FF3300";
+              break;
+            case 3:
+              color = "#CCFF00";
+              break;
+            case 2:
+              color = "#CCFF33";
+              break;
+            case 1:
+              color = "#00FF00";
+              break;
+            case 0:
+              color = "#00FF33";
+              break;
           }
+          alert(location);
         }
-      }*/
+      }
       
       /*
       colors to use:
@@ -62,20 +86,15 @@
       State, Pneumonia, 1949, 1950
       State, Streptococcal Sore Throat, 1960, 1961
       */
-      function codeAddress() {
-        var address = document.getElementById("address").value;
+      function codeAddress(address, color) {
+        //var address = document.getElementById("address").value; 
         geocoder.geocode( { 'address': address}, function(results, status) {
           if (status == google.maps.GeocoderStatus.OK) {
-            //map.setCenter(results[0].geometry.location);
-            /*var marker = new google.maps.Marker({
-              map: map,
-              position: results[0].geometry.location
-            });*/
             var point = results[0].geometry.location;
             var circle = new google.maps.Circle({
               center: new google.maps.LatLng(point.k, point.B),
               radius: 25000,
-              fillColor: "Red",
+              fillColor: color,
               fillOpacity: .5,
               strokeWeight: 0,
               map: map
@@ -100,7 +119,7 @@
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
   </head>
-  <body onload="initialize()">
+  <body>
     <div id="panel">
       <select>
         <option value="2000">2000</option>
