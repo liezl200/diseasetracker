@@ -23,15 +23,19 @@ from google.appengine.ext import ndb
 apikey = '2f2aee936736fe734d68'
 class MapHandler(webapp2.RequestHandler):
   def get(self):
-    template_values = {}
-    template = jinja_environment.get_template('map.html')
-    self.response.out.write(template.render(template_values))
+	if 'Production' in os.environ['SERVER_SOFTWARE']:
+		serverUrl = "http://" + get_application_id() + ".appspot.com"
+	else:
+		serverUrl = "http://localhost:8080"
+	template_values = {'serverUrl' : serverUrl}
+	template = jinja_environment.get_template('map.html')
+	self.response.out.write(template.render(template_values))
 
 class IndexHandler(webapp2.RequestHandler):
   def get(self):
-    template_values = {}
-    template = jinja_environment.get_template('index.html')
-    self.response.out.write(template.render(template_values))
+	template_values = {}
+	template = jinja_environment.get_template('index.html')
+	self.response.out.write(template.render(template_values))
 
 class DiseaseHandler(webapp2.RequestHandler):
 	def get(self):
@@ -85,7 +89,7 @@ class LocDataHandler(webapp2.RequestHandler):
 			+ '&loc='+ loc \
 			+ '&state=' + state \
 			+ '&disease=' + disease \
- 			+ '&event=' + ev
+			+ '&event=' + ev
 		if start: #optional query param
 			xmlurl += '&start=' + start
 		if end: #optional query param
