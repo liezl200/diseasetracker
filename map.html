@@ -28,9 +28,11 @@
       var diseaseList;
       var selectedYear;
       var selectedDisease;
+      var allCircles;
 
       function initialize() {
         //geocoder = new google.maps.Geocoder();
+        allCircles = [];
         var latlng = new google.maps.LatLng(39.0997, -94.5783);
         var mapOptions = {
           center: latlng,
@@ -42,7 +44,6 @@
         map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
         diseaseList = getDiseases();
         determineColor(getYrStateDCounts(selectedDisease, selectedYear));
-
         addEm();
       }
 
@@ -129,20 +130,31 @@
             strokeWeight: 0,
             map: map
           });
-
+          allCircles.push(circle);
           var infowindow =  new google.maps.InfoWindow({
               content: ''
           });
           bindInfoWindow(circle, map, infowindow, 'count: ' + count);
         }
       }
+      /*function newCircles() {
+        //geocoder = new google.maps.Geocoder();
+        allCircles = [];
+        determineColor(getYrStateDCounts(selectedDisease, selectedYear));
+      }*/
       function update(){
         e1 = document.getElementById("years");
         e2 = document.getElementById("diseases");
         selectedYear = e1.options[e1.selectedIndex].value;
         selectedDisease = e2.options[e2.selectedIndex].value;
         console.log(selectedYear, selectedDisease);
+        for(key in allCircles) {
+          allCircles[key].setMap(null);
+        };
+        //newCircles();
       }
+      
+
       function bindInfoWindow(circle, map, infowindow, html) {
           google.maps.event.addListener(circle, 'click', function() {
               infowindow.setPosition(circle.getCenter());
@@ -161,7 +173,6 @@
       <select id="diseases">
       </select>
 
-      <input id="address" type="textbox" value="Kansas City, KS">
       <input type="button" value="Update" onclick="update()">
     </div>
     <div id="map-canvas"/>
