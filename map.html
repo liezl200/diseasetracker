@@ -291,7 +291,7 @@ function getDiseases(){
 
         
         
-        alert(maxCt);
+        //alert(maxCt);
         var sectionSize = maxCt/6.0;
         for(var location in countDict) {
           var ct = parseInt(countDict[location]);
@@ -353,10 +353,11 @@ function getDiseases(){
           });
           allCircles.push(circle);
           var infowindow =  new google.maps.InfoWindow({
-              content: ''
+              content: 'count:      ',
+              maxWidth: 200
           });
           infoWindows.push(infowindow);
-          bindInfoWindow(circle, map, infowindow, 'count: ' + count);
+          bindInfoWindow(circle, map, infowindow, 'count:&nbsp;' + count);
         }
       }
       function newCircles() {
