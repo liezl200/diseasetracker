@@ -37,7 +37,7 @@
         };
 
         map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-        determineColor(getYrStateDCounts('Anthrax', 1942));
+        determineColor(getYrStateDCounts('Measles', 1906));
         diseaseList = ["disease1", "disease2", "disease3", "disease4"];
         addEm();
 
@@ -67,30 +67,33 @@
           }
         }
         var sectionSize = maxCt/6.0;
-
         for(var location in countDict) {
-
           var ct = parseInt(countDict[location]);
           var color = "#FF0000";
-          alert(ct/sectionSize);
-          switch(Math.floor(ct/sectionSize)){
-            case 4:
-              color = "#FF3300";
-              break;
-            case 3:
-              color = "#CCFF00";
-              break;
-            case 2:
-              color = "#CCFF33";
-              break;
-            case 1:
-              color = "#00FF00";
-              break;
-            case 0:
-              color = "#00FF33";
-              break;
+          if(maxCt > 0){
+            alert(ct/sectionSize);
+            switch(Math.floor(ct/sectionSize)){
+              case 4:
+                color = "#FF3300";
+                break;
+              case 3:
+                color = "#CCFF00";
+                break;
+              case 2:
+                color = "#CCFF33";
+                break;
+              case 1:
+                color = "#00FF00";
+                break;
+              case 0:
+                color = "#00FF33";
+                break;
+            }
           }
-          codeAddress(location, color);
+          else{
+            color = "#00FF33"
+          }
+          codeAddress(location, color, ct);
         }
       }
       
@@ -112,7 +115,7 @@
       State, Pneumonia, 1949, 1950
       State, Streptococcal Sore Throat, 1960, 1961
       */
-      function codeAddress(address, color) {
+      function codeAddress(address, color, count) {
         //var address = document.getElementById("address").value; 
         geocoder.geocode( { 'address': address}, function(results, status) {
           if (status == google.maps.GeocoderStatus.OK) {
@@ -129,7 +132,7 @@
             var infowindow =  new google.maps.InfoWindow({
                 content: ''
             });
-            bindInfoWindow(circle, map, infowindow, 'test' + "<br>" + 'testline2');
+            bindInfoWindow(circle, map, infowindow, 'count: ' + count);
           } else {
             alert("Geocode was not successful for the following reason: " + status);
           }
