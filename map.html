@@ -29,6 +29,7 @@
       var selectedYear;
       var selectedDisease;
       var allCircles;
+      var infoWindows;
       var xhttp = null;
       var cities = null;
       var states = null;
@@ -125,10 +126,12 @@
         xhttp.send();
         xmlDoc = xhttp.responseXML;
         var r = xmlDoc.getElementsByTagName('number');
+        //alert(r[0].childNodes[0].nodeValue);
         var countSum = 0;
         //@todo: add more efficient xml parsing later
         for (i = 0; i < r.length; i++) {
           countSum += parseInt(r[i].childNodes[0].nodeValue);
+          console.log(parseInt(r[i].childNodes[0].nodeValue));
         }
         return countSum;
       }
@@ -218,6 +221,7 @@ function getDiseases(){
       function initialize() {
         //geocoder = new google.maps.Geocoder();
         allCircles = [];
+        infoWindows = [];
         var latlng = new google.maps.LatLng(39.0997, -94.5783);
         var mapOptions = {
           center: latlng,
@@ -319,11 +323,13 @@ function getDiseases(){
           var infowindow =  new google.maps.InfoWindow({
               content: ''
           });
+          infoWindows.push(infowindow);
           bindInfoWindow(circle, map, infowindow, 'count: ' + count);
         }
       }
       function newCircles() {
         allCircles = [];
+        infoWindows = [];
         determineColor(getYrStateDCounts(selectedDisease, selectedYear));
       }
       function update(){
@@ -335,6 +341,9 @@ function getDiseases(){
         for(key in allCircles) {
           allCircles[key].setMap(null);
         };
+        for(var i in infoWindows){
+          infoWindows[i].close();
+        }
         newCircles();
       }
       

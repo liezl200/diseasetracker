@@ -73,7 +73,7 @@ class StateHandler(webapp2.RequestHandler):
 class LocDataHandler(webapp2.RequestHandler):
 	def get(self):
 		loc_type = self.request.get('loc_type')
-		loc = self.request.get('loc')
+		#loc = self.request.get('loc')
 		state = self.request.get('state')
 		disease = self.request.get('disease')
 		ev = self.request.get('event')
@@ -86,7 +86,6 @@ class LocDataHandler(webapp2.RequestHandler):
 		#build xml request
 		xmlurl = 'http://www.tycho.pitt.edu/api/query?' \
 			+ 'loc_type=' + loc_type \
-			+ '&loc='+ loc \
 			+ '&state=' + state \
 			+ '&disease=' + disease \
 			+ '&event=' + ev
@@ -94,7 +93,8 @@ class LocDataHandler(webapp2.RequestHandler):
 			xmlurl += '&start=' + start
 		if end: #optional query param
 			xmlurl += '&end=' + end
-
+		#if loc:
+		#	xmlurl += '&loc=' + loc
 		#global var
 		xmlurl += '&apikey=' + apikey
 
