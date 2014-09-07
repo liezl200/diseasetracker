@@ -21,7 +21,7 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUNBU9A2fuZ25CX_LfvEPCBjTAy8r3iBc">
     </script>
     <script src="/static/jycho.js"></script>
-
+    <script src="/static/jquery-1.11.1.min.js"></script>
     <script type="text/javascript">
       var geocoder;
       var map;
@@ -61,15 +61,16 @@
       function determineColor(countDict) {
         var maxCt = 0;
         for(var key in countDict){
-          if (countDict[key] > maxCt){
-            maxCt = countDict[key];
+          var currCt = parseInt(countDict[key]);
+          if (currCt > maxCt){
+            maxCt = currCt;
           }
         }
         var sectionSize = maxCt/6.0;
 
         for(var location in countDict) {
 
-          var ct = countDict[location];
+          var ct = parseInt(countDict[location]);
           var color = "#FF0000";
           alert(ct/sectionSize);
           switch(Math.floor(ct/sectionSize)){
