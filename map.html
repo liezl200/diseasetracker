@@ -309,7 +309,7 @@ function getDiseases(){
         if(Object.keys(geoCache).indexOf(address) != -1){
           var circle = new google.maps.Circle({
             center: new google.maps.LatLng(geoCache[address][0], geoCache[address][1]),
-            radius: 25000,
+            radius: 50000,
             fillColor: color,
             fillOpacity: .5,
             strokeWeight: 0,
