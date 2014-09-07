@@ -126,7 +126,7 @@ function getYrStateDCounts(disease, year){
 }
 // not intended to be used
 function getStates(){
-	if(states == null || states.isEmpty()){
+	if(states == null){
 		if(xhttp == null)
 			initializeXMLRequest();
 		states = [];
@@ -147,7 +147,7 @@ function getStates(){
 
 //will provide the data that will be used for querying and geocoding
 function getCities(){
-	if(cities == null || cities.isEmpty()){
+	if(cities == null){
 		if(typeof xhttp == undefined || xhttp == null)
 			initializeXMLRequest();
 		cities = {};
@@ -168,7 +168,7 @@ function getCities(){
 }
 
 function getDiseases(){
-	if(diseases == null || diseases.isEmpty()){
+	if(diseases == null){
 		if(xhttp == null)
 			initializeXMLRequest();
 		diseases = [];

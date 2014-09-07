@@ -137,11 +137,10 @@
           bindInfoWindow(circle, map, infowindow, 'count: ' + count);
         }
       }
-      /*function newCircles() {
-        //geocoder = new google.maps.Geocoder();
+      function newCircles() {
         allCircles = [];
         determineColor(getYrStateDCounts(selectedDisease, selectedYear));
-      }*/
+      }
       function update(){
         e1 = document.getElementById("years");
         e2 = document.getElementById("diseases");
@@ -151,7 +150,7 @@
         for(key in allCircles) {
           allCircles[key].setMap(null);
         };
-        //newCircles();
+        newCircles();
       }
       
 
