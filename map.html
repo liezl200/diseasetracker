@@ -25,6 +25,8 @@
     <script type="text/javascript">
       var geocoder;
       var map;
+      var diseaseList;
+
       function initialize() {
         geocoder = new google.maps.Geocoder();
         var latlng = new google.maps.LatLng(39.0997, -94.5783);
@@ -33,11 +35,27 @@
           zoom: 5,
           streetViewControl: false
         };
-        map = new google.maps.Map(document.getElementById("map-canvas"),
-            mapOptions);
+        map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
         determineColor(getYrStateDCounts('Anthrax', 1942));
-        
+        diseaseList = ["disease1", "disease2", "disease3", "disease4"];
+        addEm();
       }
+
+      function addDisease(disease) {
+        $("#diseases").append("<option value=" + disease + ">" + disease + "</option>");
+      };
+      function addYear(year) {
+        $("#years").append("<option value=" + year + ">" + year + "</option>")
+      };
+      function addEm() {
+        for(var i = 0; i < diseaseList.length; i++){
+          addDisease(diseaseList[i]);
+        };      
+        for(var i = 1888; i < 2014; i++){
+          addYear(i);
+        };
+      };
+
       function determineColor(countDict) {
         // get the list of values for every key in the associative array/ object/ 'dictionary'
         var counts = Object.keys( countDict ).map(function ( key ) { return countDict[key]; });
@@ -121,19 +139,12 @@
   </head>
   <body>
     <div id="panel">
-      <select>
-        <option value="2000">2000</option>
-        <option value="2001">2001</option>
-        <option value="2002">2002</option>
-        <option value="2003">2003</option>
+      <select id="years">
       </select>
 
-      <select id="disease">
-        <option value="chicken pox">chicken pox</option>
-        <option value="aids">aids</option>
-        <option value="disease1">disease1</option>
-        <option value="disease2">disease2</option>
+      <select id="diseases">
       </select>
+
       <input id="address" type="textbox" value="Kansas City, KS">
       <input type="button" value="Update" onclick="codeAddress()">
     </div>
