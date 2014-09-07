@@ -23,14 +23,14 @@
     <script src="/static/jycho.js"></script>
     <script src="/static/jquery-1.11.1.min.js"></script>
     <script type="text/javascript">
-      var geocoder;
+      //var geocoder;
       var map;
       var diseaseList;
       var selectedYear;
       var selectedDisease;
 
       function initialize() {
-        geocoder = new google.maps.Geocoder();
+        //geocoder = new google.maps.Geocoder();
         var latlng = new google.maps.LatLng(39.0997, -94.5783);
         var mapOptions = {
           center: latlng,
@@ -119,27 +119,24 @@
       State, Streptococcal Sore Throat, 1960, 1961
       */
       function codeAddress(address, color, count) {
-        //var address = document.getElementById("address").value; 
-        geocoder.geocode( { 'address': address}, function(results, status) {
-          if (status == google.maps.GeocoderStatus.OK) {
-            var point = results[0].geometry.location;
-            var circle = new google.maps.Circle({
-              center: new google.maps.LatLng(point.k, point.B),
-              radius: 25000,
-              fillColor: color,
-              fillOpacity: .5,
-              strokeWeight: 0,
-              map: map
-            });
 
-            var infowindow =  new google.maps.InfoWindow({
-                content: ''
-            });
-            bindInfoWindow(circle, map, infowindow, 'count: ' + count);
-          } else {
-            alert("Geocode was not successful for the following reason: " + status);
-          }
-        }); 
+        var geoCache = getStateGeoCache();
+        if(Object.keys(geoCache).indexOf(address) != -1){
+          alert(address);
+          var circle = new google.maps.Circle({
+            center: new google.maps.LatLng(geoCache[address][0], geoCache[address][1]),
+            radius: 25000,
+            fillColor: color,
+            fillOpacity: .5,
+            strokeWeight: 0,
+            map: map
+          });
+
+          var infowindow =  new google.maps.InfoWindow({
+              content: ''
+          });
+          bindInfoWindow(circle, map, infowindow, 'count: ' + count);
+        }
       }
       function update(){
         e1 = document.getElementById("years");
