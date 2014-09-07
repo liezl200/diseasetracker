@@ -39,8 +39,8 @@
           zoom: 5,
           streetViewControl: false
         };
-        selectedYear = 1942;
-        selectedDisease = "Anthrax";
+        selectedYear = 1949;
+        selectedDisease = "PNEUMONIA";
         map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
         diseaseList = getDiseases();
         determineColor(getYrStateDCounts(selectedDisease, selectedYear));
@@ -111,7 +111,6 @@
       */
       /*
       data to use:
-      State, Anthrax, 1942-1944
       State, Influenza, 1945, 1950
       State, Chicken Pox, 1977
       State, Leprosy, 1942-1944
