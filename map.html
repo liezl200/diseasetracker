@@ -75,7 +75,6 @@
           var ct = parseInt(countDict[location]);
           var color = "#FF0000";
           if(maxCt > 0){
-            alert(ct/sectionSize);
             switch(Math.floor(ct/sectionSize)){
               case 4:
                 color = "#FF3300";
@@ -123,7 +122,6 @@
 
         var geoCache = getStateGeoCache();
         if(Object.keys(geoCache).indexOf(address) != -1){
-          alert(address);
           var circle = new google.maps.Circle({
             center: new google.maps.LatLng(geoCache[address][0], geoCache[address][1]),
             radius: 50000,
@@ -139,11 +137,10 @@
           bindInfoWindow(circle, map, infowindow, 'count: ' + count);
         }
       }
-      /*function newCircles() {
-        //geocoder = new google.maps.Geocoder();
+      function newCircles() {
         allCircles = [];
         determineColor(getYrStateDCounts(selectedDisease, selectedYear));
-      }*/
+      }
       function update(){
         e1 = document.getElementById("years");
         e2 = document.getElementById("diseases");
@@ -153,7 +150,7 @@
         for(key in allCircles) {
           allCircles[key].setMap(null);
         };
-        //newCircles();
+        newCircles();
       }
       
 

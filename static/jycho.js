@@ -76,7 +76,7 @@ function getLocData(loc_type, loc, state, disease, ev, start, end){
 		+ 'loc_type=' + spaceReplace(loc_type)
 		+ '&state=' + spaceReplace(state)
 		+ '&disease=' + spaceReplace(disease)
-		+ '&event=' + spaceReplace(ev)
+		+ '&event=' + spaceReplace(ev);
 	var dateflg = false; // currently no functionality
 	var cityflg = false; // currently no functionality
 	if(typeof start != undefined && start != null && start != ""){ //optional query param
@@ -126,7 +126,7 @@ function getYrStateDCounts(disease, year){
 }
 // not intended to be used
 function getStates(){
-	if(states == null || states.isEmpty()){
+	if(states == null){
 		if(xhttp == null)
 			initializeXMLRequest();
 		states = [];
@@ -147,7 +147,7 @@ function getStates(){
 
 //will provide the data that will be used for querying and geocoding
 function getCities(){
-	if(cities == null || cities.isEmpty()){
+	if(cities == null){
 		if(typeof xhttp == undefined || xhttp == null)
 			initializeXMLRequest();
 		cities = {};
@@ -168,7 +168,7 @@ function getCities(){
 }
 
 function getDiseases(){
-	if(diseases == null || diseases.isEmpty()){
+	if(diseases == null){
 		if(xhttp == null)
 			initializeXMLRequest();
 		diseases = [];
