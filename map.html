@@ -103,7 +103,7 @@
         if(xhttp == null)
           initializeXMLRequest();
         var diseases = [];
-        alert(disease);
+        //alert(disease);
         var serverUrl = "{{serverUrl}}/locData?" 
           + 'loc_type=' + spaceReplace(loc_type)
           + '&state=' + spaceReplace(state)
@@ -132,7 +132,7 @@
         //@todo: add more efficient xml parsing later
         for (i = 0; i < r.length; i++) {
           countSum += parseInt(r[i].childNodes[0].nodeValue);
-          console.log(parseInt(r[i].childNodes[0].nodeValue));
+          //console.log(parseInt(r[i].childNodes[0].nodeValue));
         }
         return countSum;
       }
@@ -254,19 +254,44 @@ function getDiseases(){
 
       function determineColor(countDict) {
         var maxCt = 0;
-        for(var key in countDict){
-          var currCt = parseInt(countDict[key]);
-          if (currCt > maxCt){
-            maxCt = currCt;
-          }
-        }
+        var tuples = [];
+
+        for (var key in countDict) tuples.push([key, parseInt(countDict[key])]);
+
+        tuples.sort(function(a, b) {
+            a = a[1];
+            b = b[1];
+
+            return a < b ? -1 : (a > b ? 1 : 0);
+        });
+
+        /*for (var i = 0; i < tuples.length; i++) {
+            var key = tuples[i][0];
+            var value = tuples[i][1];
+
+            // do something with key and value
+        }*/
+        var median = tuples[24][1];
+        var q1 = tuples[12][1];
+        var q3 = tuples[36][1];
+        var iqr = q3 - q1;
+        var outlierMin = iqr * 3 + q3;
         //5, 18, 27, 27, 18, 5
-        for(var location in countDict){
-          var ct = parseInt(countDict[location]);
-          var color = "#FF0000";
-          if(ct )
+
+        for (var i = tuples.length - 1; i >= 0; i--) {
+            var key = tuples[i][0];
+            var value = tuples[i][1];
+            if(value <= outlierMin){
+              maxCt = value;
+              break;
+            }
+            // do something with key and value
         }
-        /*
+
+
+        
+        
+        alert(maxCt);
         var sectionSize = maxCt/6.0;
         for(var location in countDict) {
           var ct = parseInt(countDict[location]);
@@ -292,7 +317,7 @@ function getDiseases(){
           }
           else{
             color = "#00FF33"
-          }*/
+          }
           codeAddress(location, color, ct);
         }
       }
@@ -344,7 +369,7 @@ function getDiseases(){
         e2 = document.getElementById("diseases");
         selectedYear = e1.options[e1.selectedIndex].value;
         selectedDisease = e2.options[e2.selectedIndex].value;
-        console.log(selectedYear, selectedDisease);
+        //console.log(selectedYear, selectedDisease);
         for(key in allCircles) {
           allCircles[key].setMap(null);
         };
