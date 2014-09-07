@@ -103,6 +103,7 @@
         if(xhttp == null)
           initializeXMLRequest();
         var diseases = [];
+        alert(disease);
         var serverUrl = "{{serverUrl}}/locData?" 
           + 'loc_type=' + spaceReplace(loc_type)
           + '&state=' + spaceReplace(state)
@@ -237,7 +238,7 @@ function getDiseases(){
       }
 
       function addDisease(disease) {
-        $("#diseases").append("<option value=" + disease + ">" + disease + "</option>");
+        $("#diseases").append('<option value="' + spaceReplace(disease) + '">' + disease + "</option>");
       };
       function addYear(year) {
         $("#years").append("<option value=" + year + ">" + year + "</option>")
@@ -259,6 +260,13 @@ function getDiseases(){
             maxCt = currCt;
           }
         }
+        //5, 18, 27, 27, 18, 5
+        for(var location in countDict){
+          var ct = parseInt(countDict[location]);
+          var color = "#FF0000";
+          if(ct )
+        }
+        /*
         var sectionSize = maxCt/6.0;
         for(var location in countDict) {
           var ct = parseInt(countDict[location]);
@@ -284,7 +292,7 @@ function getDiseases(){
           }
           else{
             color = "#00FF33"
-          }
+          }*/
           codeAddress(location, color, ct);
         }
       }
