@@ -76,7 +76,7 @@ function getLocData(loc_type, loc, state, disease, ev, start, end){
 		+ 'loc_type=' + spaceReplace(loc_type)
 		+ '&state=' + spaceReplace(state)
 		+ '&disease=' + spaceReplace(disease)
-		+ '&event=' + spaceReplace(ev)
+		+ '&event=' + spaceReplace(ev);
 	var dateflg = false; // currently no functionality
 	var cityflg = false; // currently no functionality
 	if(typeof start != undefined && start != null && start != ""){ //optional query param

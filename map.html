@@ -74,7 +74,6 @@
           var ct = parseInt(countDict[location]);
           var color = "#FF0000";
           if(maxCt > 0){
-            alert(ct/sectionSize);
             switch(Math.floor(ct/sectionSize)){
               case 4:
                 color = "#FF3300";
@@ -122,7 +121,6 @@
 
         var geoCache = getStateGeoCache();
         if(Object.keys(geoCache).indexOf(address) != -1){
-          alert(address);
           var circle = new google.maps.Circle({
             center: new google.maps.LatLng(geoCache[address][0], geoCache[address][1]),
             radius: 25000,
