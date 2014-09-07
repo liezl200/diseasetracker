@@ -26,6 +26,8 @@
       var geocoder;
       var map;
       var diseaseList;
+      var selectedYear;
+      var selectedDisease;
 
       function initialize() {
         geocoder = new google.maps.Geocoder();
@@ -35,12 +37,13 @@
           zoom: 5,
           streetViewControl: false
         };
-
+        selectedYear = 1942;
+        selectedDisease = "Anthrax";
         map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-        determineColor(getYrStateDCounts('Measles', 1906));
         diseaseList = getDiseases();
-        addEm();
+        determineColor(getYrStateDCounts(selectedDisease, selectedYear));
 
+        addEm();
       }
 
       function addDisease(disease) {
@@ -138,6 +141,13 @@
           }
         }); 
       }
+      function update(){
+        e1 = document.getElementById("years");
+        e2 = document.getElementById("diseases");
+        selectedYear = e1.options[e1.selectedIndex].value;
+        selectedDisease = e2.options[e2.selectedIndex].value;
+        console.log(selectedYear, selectedDisease);
+      }
       function bindInfoWindow(circle, map, infowindow, html) {
           google.maps.event.addListener(circle, 'click', function() {
               infowindow.setPosition(circle.getCenter());
@@ -157,7 +167,7 @@
       </select>
 
       <input id="address" type="textbox" value="Kansas City, KS">
-      <input type="button" value="Update" onclick="codeAddress()">
+      <input type="button" value="Update" onclick="update()">
     </div>
     <div id="map-canvas"/>
   </body>
