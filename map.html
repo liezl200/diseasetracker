@@ -238,9 +238,15 @@ function getDiseases(){
       }
 
       function addDisease(disease) {
+        if (disease == "PNEUMONIA"){
+          $("#diseases").append('<option value="' + spaceReplace(disease) + '" selected="selected">' + disease + "</option>");
+        }
         $("#diseases").append('<option value="' + spaceReplace(disease) + '">' + disease + "</option>");
       };
       function addYear(year) {
+        if (year == 1949){
+          $("#years").append("<option value=" + year + " selected='selected'>" + year + "</option>")
+        }
         $("#years").append("<option value=" + year + ">" + year + "</option>")
       };
       function addEm() {
