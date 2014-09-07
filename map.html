@@ -65,12 +65,12 @@
       'NH':[43.1938516, -71.5723953], 
       'NJ':[40.0583238, -74.4056612], 
       'NM':[34.5199402, -105.8700901], 
-      'NY':[40.7127837, -74.0059413], 
+      'NY':[42.8482, -75.0000], 
       'NC':[35.7595731, -79.01929969999999], 
       'ND':[47.5514926, -101.0020119], 
       'OH':[40.4172871, -82.90712300000001], 
       'OK':[35.0077519, -97.092877], 
-      'OR':[40.2968979, -111.6946475], 
+      'OR':[44.0000, -120.5000], 
       'PA':[41.2033216, -77.1945247], 
       'RI':[41.5800945, -71.4774291], 
       'SC':[33.836081, -81.1637245], 
@@ -229,7 +229,7 @@ function getDiseases(){
           streetViewControl: false
         };
         selectedYear = 1949;
-        selectedDisease = "Pneumonia";
+        selectedDisease = "PNEUMONIA";
         map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
         diseaseList = getDiseases();
         determineColor(getYrStateDCounts(selectedDisease, selectedYear));
@@ -300,7 +300,6 @@ function getDiseases(){
       */
       /*
       data to use:
-      State, Anthrax, 1942-1944
       State, Influenza, 1945, 1950
       State, Chicken Pox, 1977
       State, Leprosy, 1942-1944
